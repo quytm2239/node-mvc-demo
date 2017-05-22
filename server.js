@@ -117,5 +117,6 @@ var mongoose = require('mongoose');
 controllers = require('./controllers')(app, mongoose, config);
 
 // Load Views render
+app.use(express.static(__dirname + '/home_page'));
 app.use(express.static(__dirname + '/views'));
 views = require('./views')(app, config);
