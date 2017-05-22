@@ -9,4 +9,8 @@ module.exports = function(app, config){
 	router.get('/home', function(req, res) {
         res.sendFile(__dirname + '/home.html');
 	});
+
+	router.get('/', function(req, res) {
+		res.sendFile(__dirname + '/home.html');
+	});
 };

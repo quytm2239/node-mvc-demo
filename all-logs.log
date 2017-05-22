@@ -305,3 +305,15 @@
 
 2017-05-22T04:37:19.580Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:37:19 +0000", "method": "GET", "url": "/home/img_mountains_wide.jpg", "http_version": "1.1", "status": "200", "result_length": "60405", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "1.089"}
 
+2017-05-22T04:41:40.120Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "0.945"}
+
+2017-05-22T04:41:40.133Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/css/home.css", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "0.821"}
+
+2017-05-22T04:41:40.134Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/img_nature_wide.jpg", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "1.699"}
+
+2017-05-22T04:41:40.140Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/js/home.js", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "0.606"}
+
+2017-05-22T04:41:40.146Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/img_fjords_wide.jpg", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "0.638"}
+
+2017-05-22T04:41:40.155Z - info: {"remote_addr": "::1", "date": "22/May/2017:04:41:40 +0000", "method": "GET", "url": "/home/img_mountains_wide.jpg", "http_version": "1.1", "status": "304", "result_length": "-", "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/63.4.156 Chrome/57.4.2987.156 Safari/537.36", "response_time": "1.243"}
+
