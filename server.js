@@ -114,9 +114,15 @@ var mongoose = require('mongoose');
 // mongoose.connect(config.mongoose_connect);
 
 // Load API's handler
-controllers = require('./controllers')(app, mongoose, config);
+var api_router = express.Router();
+app.use(config.api_path,api_router);
+
+controllers = require('./controllers')(app, api_router, mongoose, config);
 
 // Load Views render
+var views_router = express.Router();
+app.use(config.views_path,views_router);
+
 app.use(express.static(__dirname + '/home_page'));
 app.use(express.static(__dirname + '/views'));
-views = require('./views')(app, config);
+views = require('./views')(app, views_router, config);

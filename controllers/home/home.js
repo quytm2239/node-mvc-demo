@@ -1,12 +1,8 @@
-module.exports = function(app, mongoose, config){
-	var express = require('express'),
-		router = express.Router();
-
+module.exports = function(app, api_router, mongoose, config){
 	var utils = app.get('utils');
 	var errcode = app.get('errcode');
-	app.use(config.api_path,router);
 
-	router.post('/home', function(req, res) {
+	api_router.post('/home', function(req, res) {
 	    res.status(200).send({message:'Welcome to our HOMEEEEE!!!'});
 	});
 };

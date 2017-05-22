@@ -2,12 +2,7 @@
 // MAIN SCREEN (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
 
-module.exports = function(app, mongoose, config){
-	var express = require('express'),
-		rootRouter = express.Router();
-
-	app.use(config.api_path,rootRouter);
-
+module.exports = function(app, api_router, mongoose, config){
 	var async = require('async');
 
 	var utils = app.get('utils');
@@ -17,9 +12,7 @@ module.exports = function(app, mongoose, config){
 	var Video = require('./../../mongoose/model/video')
 	var Category = require('./../../mongoose/model/category')
 
-	app.use(config.api_path,rootRouter);
-
-	rootRouter.post('/video', function(req, res) {
+	api_router.post('/video', function(req, res) {
 
 		var db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));
@@ -47,7 +40,7 @@ module.exports = function(app, mongoose, config){
 	});
 
 	//=============================[CATEGORY]===================================
-	rootRouter.post('/category', function(req, res) {
+	api_router.post('/category', function(req, res) {
 
 		var db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));
@@ -71,7 +64,7 @@ module.exports = function(app, mongoose, config){
 		});
 	});
 
-	rootRouter.post('/categories', function(req, res) {
+	api_router.post('/categories', function(req, res) {
 
 		var cateArray = [];
 		var cateNameArray = utils.chkObj(req.body.categories) ? req.body.categories.split('|') : [];
@@ -103,7 +96,7 @@ module.exports = function(app, mongoose, config){
 	});
 
 
-	rootRouter.get('/category', function(req, res) {
+	api_router.get('/category', function(req, res) {
 
 		var db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));

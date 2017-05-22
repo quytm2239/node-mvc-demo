@@ -7,9 +7,9 @@ var list_path = './list';
 var backend_path = './backend';
 var home_path = './home';
 
-module.exports = function(app, mongoose, config){
-	require(home_path + '/home')(app, mongoose, config);
- 	require(client_path + '/client')(app, mongoose, config);
- 	require(list_path + '/list')(app, mongoose, config);
-	require(backend_path + '/backend')(app, mongoose, config);
+module.exports = function(app, api_router, mongoose, config){
+	require(home_path + '/home')(app, api_router, mongoose, config);
+ 	require(client_path + '/client')(app, api_router, mongoose, config);
+ 	require(list_path + '/list')(app, api_router, mongoose, config);
+	require(backend_path + '/backend')(app, api_router, mongoose, config);
 };
