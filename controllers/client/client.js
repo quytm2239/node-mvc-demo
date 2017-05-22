@@ -15,6 +15,5 @@ module.exports = function(app, api_router, mongoose, config){
 		} else {
 			res.redirect('/login?error=0');
 		}
-
 	});
 };
