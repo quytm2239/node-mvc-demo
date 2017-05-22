@@ -6,11 +6,13 @@ module.exports = function(app, config){
 	var errcode = app.get('errcode');
 	app.use(config.views_path,router);
 
+	router.get('/', function(req, res) {
+		res.sendFile(__dirname + '/home.html');
+	});
+
 	router.get('/home', function(req, res) {
         res.sendFile(__dirname + '/home.html');
 	});
 
-	router.get('/', function(req, res) {
-		res.sendFile(__dirname + '/home.html');
-	});
+
 };
