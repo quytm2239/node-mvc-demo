@@ -6,11 +6,17 @@ module.exports = function(app, views_router, config){
         res.sendFile(__dirname + '/main.html');
 	});
 
-	views_router.get('/css/main.css', function(req, res) {
+	views_router.get([
+		'/css/main.css',
+		'/main/css/main.css'], // for get /main/
+		function(req, res) {
 		res.sendFile(__dirname + '/css/main.css');
 	});
 
-	views_router.get('/js/main.js', function(req, res) {
+	views_router.get([
+		'/js/main.js',
+		'/main/js/main.js'], // for get /main/
+		function(req, res) {
 		res.sendFile(__dirname + '/js/main.js');
 	});
 };

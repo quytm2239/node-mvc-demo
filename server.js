@@ -124,5 +124,9 @@ var views_router = express.Router();
 app.use(config.views_path,views_router);
 
 app.use(express.static(__dirname + '/home_page'));
-app.use(express.static(__dirname + '/views'));
+
+app.use(express.static(__dirname + '/views/login/img'));
+app.use(express.static(__dirname + '/views/main/img'));
+app.use(express.static(__dirname + '/views/list/img'));
+
 views = require('./views')(app, views_router, config);

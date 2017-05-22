@@ -14,12 +14,18 @@ module.exports = function(app, views_router, config){
             res.sendFile(__dirname + '/login.html');
         }
 	});
-
-	views_router.get('/css/login.css', function(req, res) {
+	
+	views_router.get([
+		'/css/login.css',
+		'/login/css/login.css'],
+		function(req, res) {
 		res.sendFile(__dirname + '/css/login.css');
 	});
 
-	views_router.get('/js/login.js', function(req, res) {
+	views_router.get([
+		'/js/login.js',
+		'/login/js/login.js'],
+		function(req, res) {
 		res.sendFile(__dirname + '/js/login.js');
 	});
 };
