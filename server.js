@@ -35,6 +35,9 @@ var errcode = require('./errcode');
 var utils = require('./utils');
 var show_clientip = require('./middleware/show_clientip');
 
+// load ORM db instance
+// var sequelize = require('./dbconnection/mysql/connection');
+var ORM = require('./model/orm/orm');
 // create instance of "pool" mySql connection
 //var pool = mysql.createPool(config.db_config);
 
@@ -71,6 +74,14 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(show_clientip);
+
+// redirect to [right] route
+app.use(function(req, res, next) {
+   if(req.url.substr(-1) == '/' && req.url.length > 1)
+       res.redirect(301, req.url.slice(0, -1));
+   else
+       next();
+});
 
 //=========================== write log to file ================================
 var logger = new winston.Logger({
@@ -109,7 +120,7 @@ app.listen(process.env.PORT || app.get('port'), function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
 // mongoose.connect(config.mongoose_connect);
 
@@ -117,16 +128,13 @@ var mongoose = require('mongoose');
 var api_router = express.Router();
 app.use(config.api_path,api_router);
 
-controllers = require('./controllers')(app, api_router, mongoose, config);
+controllers = require('./controllers')(app, api_router, ORM, config);
 
 // Load Views render
 var views_router = express.Router();
 app.use(config.views_path,views_router);
 
 app.use(express.static(__dirname + '/home_page'));
-
-app.use(express.static(__dirname + '/views/login/img'));
-app.use(express.static(__dirname + '/views/main/img'));
-app.use(express.static(__dirname + '/views/list/img'));
+app.use(express.static(__dirname + '/views'));
 
 views = require('./views')(app, views_router, config);
