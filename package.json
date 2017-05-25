@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start" : "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "mongoose": "^4.10.1",
     "morgan": "^1.8.1",
     "mysql": "^2.13.0",
+    "password-hash": "^1.2.2",
     "sequelize": "^3.30.4",
     "tedious": "^2.0.0",
     "winston": "^2.3.1"

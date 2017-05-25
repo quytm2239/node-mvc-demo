@@ -3,7 +3,8 @@ var Sequelize = require('sequelize');
 //Create Item Table Structure
 var Account = sequelize.define('Account', {
     id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    username:Sequelize.STRING,
+    email: Sequelize.STRING,
+    username: Sequelize.STRING,
     password: Sequelize.STRING
 });
 

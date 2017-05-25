@@ -6,7 +6,7 @@ module.exports = function(app, views_router, config){
 	    var error = req.query.error;
         if (utils.chkObj(error)) {
 			if (error == '0') {
-				res.sendFile(__dirname + '/login_error.html');
+				res.sendFile(__dirname + '/login_' + error + '.html');
 			} else {
 				res.sendFile(__dirname + '/login.html');
 			}

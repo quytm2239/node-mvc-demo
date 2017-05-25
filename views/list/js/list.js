@@ -56,7 +56,6 @@ function load() {
     httpGetAsync("GET",getListUrl,function (responseText) {
         addTable(responseText);
     });
-
 }
 
 // http requests

@@ -8,6 +8,13 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
+input[type=radio] {
+    /*width: 100%;*/
+    margin: 16px;
+    display: inline;
+    box-sizing: border-box;
+}
+
 /* Set a style for all buttons */
 button {
     background-color: #4CAF50;
@@ -17,6 +24,15 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+.error {
+    margin: 0px;
+    border: 0px solid #FF0000;
+    text-align: center;
+    vertical-align: middle;
+    color: #FF0000;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Extra styles for the cancel button */

@@ -1,4 +1,6 @@
 module.exports = function(app, views_router, config){
+	console.log('->*<- [START] Load Views ->*<-');
+
 	require('./main/mainRender')(app, views_router, config);
 	console.log('1. mainRender is loaded');
 
