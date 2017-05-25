@@ -2,61 +2,16 @@ var register_api_route = '/api/register';
 
 $(document).ready(function(){
 
-    // $("form[name='register']").validate({
-    //     // Specify validation rules
-    //     rules: {
-    //         // The key name on the left side is the name attribute
-    //         // of an input field. Validation rules are defined
-    //         // on the right side
-    //         username: "required",
-    //         lastname: "required",
-    //         email: {
-    //             required: true,
-    //             // Specify that email should be validated
-    //             // by the built-in "email" rule
-    //             email: true
-    //         },
-    //         password: {
-    //             required: true,
-    //             minlength: 6
-    //         },
-    //         repeat_password: {
-    //             required: true,
-    //             minlength: 6
-    //         },
-    //         fullname: {
-    //             required: true,
-    //         }
-    //     },
-    //     // Specify validation error messages
-    //     messages: {
-    //         firstname: "Please enter your firstname",
-    //         lastname: "Please enter your lastname",
-    //         password: {
-    //             required: "Please provide a password",
-    //             minlength: "Your password must be at least 6 characters long"
-    //         },
-    //         email: {
-    //             required: "Please enter email address",
-    //             email: "Email address is NOT valid"
-    //         }
-    //     },
-    //     // Make sure the form is submitted to the destination defined
-    //     // in the "action" attribute of the form when valid
-    //     submitHandler: function(form) {
-    //         form.submit();
-    //     }
-    // });
-
-
+    var email = $('#email');
     var username = $('#username');
     var password = $('#password');
     var repeat_password = $('#repeat_password');
-    var fullname = $('#fullname');
+    var full_name = $('#full_name');
     var error = $('#error');
 
     $("#submit").click(function(){
         // register($('form').serialize());
+        console.log($('form').serialize());
         if (validate()) {
             register($('form').serialize());
         }
@@ -64,6 +19,12 @@ $(document).ready(function(){
 
     function validate(){
         // start check
+        if (isBlank(email.val()) || validateEmail(email.val()) == false) {
+            console.log('Email is blank or NOT valid!');
+            showErrorMess(true,'Email is blank or NOT valid!');
+            return false;
+        }
+
         if (isBlank(username.val())) {
             console.log('Username is blank!');
             showErrorMess(true,'Username is blank!');
@@ -82,7 +43,13 @@ $(document).ready(function(){
             return false;
         }
 
-        if (isBlank(fullname.val())) {
+        if (password.val() != repeat_password.val()) {
+            console.log('Repeat password does NOT match!');
+            showErrorMess(true,'Repeat password does NOT match!');
+            return false;
+        }
+
+        if (isBlank(full_name.val())) {
             console.log('Fullname is blank!');
             showErrorMess(true,'Fullname is blank!');
             return false;
@@ -110,31 +77,49 @@ $(document).ready(function(){
             error.css({"border-width":"0px"});
         }
     }
+
+    function validateEmail(email) {
+        var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regex.test(email);
+    }
+
+
+    function isBlank(str){
+        if (str == '' || str == undefined || str == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function register(data){
+        var registerUrl = document.location.origin + register_api_route;
+        httpGetAsync("POST",registerUrl,data,function (responseText) {
+            console.log(responseText);
+        });
+    }
+
+    function httpGetAsync(method, theUrl, data, callback)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4)
+            {
+                if (xmlHttp.status == 200) {
+                    error.html("<b>Register successfully!<a href=" + "/" + "login" +"> Login now? </a></b>");
+                    error.height(50);
+                    error.css({"line-height":"50px","color":"#00FF00"});
+                    error.css({"border-width":"1px","border-color":"#00FF00"});
+                } else {
+                    error.text('Something went wrong please try again!');
+                    error.height(50);
+                    error.css({"line-height":"50px","color":"#FF0000"});
+                    error.css({"border-width":"1px","border-color":"#FF0000"});
+                }
+            }
+        }
+        xmlHttp.open(method, theUrl, true); // true for asynchronous
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttp.send(data);
+    }
 });
-
-
-function isBlank(str){
-    if (str == '' || str == undefined || str == null) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function register(data){
-    var registerUrl = document.location.origin + register_api_route;
-    httpGetAsync("POST",registerUrl,data,function (responseText) {
-        console.log(responseText);
-    });
-}
-
-function httpGetAsync(method, theUrl, data, callback)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    }
-    xmlHttp.open(method, theUrl, true); // true for asynchronous
-    xmlHttp.send(data);
-}

@@ -2,7 +2,7 @@
 // MAIN SCREEN (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
 var passwordHash = require('password-hash');
-var sequelize = require('sequelize');
+var sequelize = require('./../../dbconnection/mysql/connection');
 
 module.exports = function(app, api_router, ORM, config){
 	var utils = app.get('utils');
@@ -33,27 +33,13 @@ module.exports = function(app, api_router, ORM, config){
 		var email 	 = req.body.email;
 		var username = req.body.username;
 		var password = req.body.password;
-		var fullname = req.body.fullname;
+		var full_name = req.body.full_name;
 		var gender 	 = req.body.gender;
 
-
+		console.log(req.body);
 		var hashedPassword = passwordHash.generate(password);
 
-		//you can also build, save and access the object with chaining:
-		// ORM.Account.build({ username: username, password: hashedPassword }).save()
-  // 		.then(savedAccount => {
-    	// 	// you can now access the currently saved task with the variable anotherTask... nice!
-		// 	res.status(200).send({
-		// 		message:savedAccount
-		// 	});
-  // 		})
-  // 		.catch(error => {
-    	// 	res.status(500).send({
-		// 		message:error
-		// 	});
-		// });
-
-	 	return sequelize.transaction(function (t) {
+	 	sequelize.transaction(function (t) {
 			// chain all your queries here. make sure you return them.
 			return ORM.Account.create({
 				email: email,
@@ -61,7 +47,7 @@ module.exports = function(app, api_router, ORM, config){
 				password: hashedPassword
 			}, {transaction: t}).then(function (account) {
 				return ORM.Profile.create({
-					fullname: fullname,
+					full_name: full_name,
 					gender: parseInt(gender),
 					account_id: account.dataValues.id
 				}, {transaction: t});
