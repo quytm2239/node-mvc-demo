@@ -105,13 +105,17 @@ $(document).ready(function(){
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4)
             {
+                console.log(xmlHttp.responseText);
+                var JSONObj = JSON.parse(xmlHttp.responseText);
+
+                error.height(50);
                 if (xmlHttp.status == 200) {
                     error.html("<b>Register successfully!<a href=" + "/" + "login" +"> Login now? </a></b>");
-                    error.height(50);
                     error.css({"line-height":"50px","color":"#00FF00"});
                     error.css({"border-width":"1px","border-color":"#00FF00"});
+                    $('form').trigger("reset");
                 } else {
-                    error.text('Something went wrong please try again!');
+                    error.text(JSONObj.message);
                     error.height(50);
                     error.css({"line-height":"50px","color":"#FF0000"});
                     error.css({"border-width":"1px","border-color":"#FF0000"});
