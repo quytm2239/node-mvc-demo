@@ -54,8 +54,8 @@ $(document).ready(function(){
         $('#submit').prop('disabled',true);
         var loginUrl = document.location.origin + login_api_route;
         httpGetAsync("POST",loginUrl,data,function () {
-            $('#loader').show();
-            $('#submit').prop('disabled',true);
+            $('#loader').hide();
+            $('#submit').prop('disabled',false);
         });
     }
 
