@@ -1,4 +1,4 @@
-module.exports = function(app, api_router, ORM, config){
+module.exports = function(app, api_router, config){
 	var utils = app.get('utils');
 	var errcode = app.get('errcode');
 

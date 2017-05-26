@@ -4,9 +4,10 @@
 var passwordHash = require('password-hash');
 var sequelize = require('./../../dbconnection/mysql/connection');
 
-module.exports = function(app, api_router, ORM, config){
+module.exports = function(app, api_router, config){
 	var utils = app.get('utils');
 	var errcode = app.get('errcode');
+	var ORM = app.get('ORM');
 
 	api_router.post('/login', function(req, res) {
 		var username = req.body.username;
@@ -15,9 +16,13 @@ module.exports = function(app, api_router, ORM, config){
 		ORM.Account.findOne({ where: {username: username} }).then(account => {
   			// project will be the first entry of the Projects table with the title 'aProject' || null
 			if (account) {
-				console.log(account.dataValues);
 				var isMatch = passwordHash.verify(rawpassword, account.dataValues.password);
 				if (isMatch) {
+					// setup Session
+					req.session.username = account.dataValues.username;
+					req.session.email = account.dataValues.email;
+					req.session.hashedPassword = account.dataValues.password;
+
 					res.redirect('/main');
 				} else {
 					res.redirect('/login?error=0');
@@ -28,6 +33,13 @@ module.exports = function(app, api_router, ORM, config){
 		});
 	});
 
+	api_router.get('/logout', function(req, res) {
+		req.session.destroy(function(err) {
+	  	// cannot access session here
+			res.redirect('/login');
+		})
+	});
+
 	api_router.post('/register', function(req, res) {
 
 		var email 	 = req.body.email;
@@ -36,7 +48,25 @@ module.exports = function(app, api_router, ORM, config){
 		var full_name = req.body.full_name;
 		var gender 	 = req.body.gender;
 
-		console.log(req.body);
+		ORM.Account.findOne({ where: {username: username} }).then(account => {
+			// project will be the first entry of the Projects table with the title 'aProject' || null
+			if (account) {
+				var isMatch = passwordHash.verify(rawpassword, account.dataValues.password);
+				if (isMatch) {
+					// setup Session
+					req.session.username = account.dataValues.username;
+					req.session.email = account.dataValues.email;
+					req.session.hashedPassword = account.dataValues.password;
+
+					res.redirect('/main');
+				} else {
+					res.redirect('/login?error=0');
+				}
+			} else {
+				res.redirect('/login?error=0');
+			}
+		});
+
 		var hashedPassword = passwordHash.generate(password);
 
 	 	sequelize.transaction(function (t) {

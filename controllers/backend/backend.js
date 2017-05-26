@@ -2,7 +2,7 @@
 // MAIN SCREEN (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
 
-module.exports = function(app, api_router, ORM, config){
+module.exports = function(app, api_router, config){
 	var async = require('async');
 
 	var utils = app.get('utils');

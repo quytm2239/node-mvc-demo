@@ -14,6 +14,25 @@ var morgan = require('morgan');
 //var mysql = require('mysql');
 var winston = require('winston');
 
+// authenticated session
+// https://github.com/expressjs/session
+var session = require('express-session')
+
+app.use(session({
+    secret: 'node-mvc-demo',
+    cookie: { maxAge: 2628000000 },
+    resave: false,
+    saveUninitialized: false
+}));
+
+// Authentication and Authorization Middleware
+var auth = function(req, res, next) {
+  if (req.session && req.session.user === "amy" && req.session.admin)
+    return next();
+  else
+    return res.sendStatus(401);
+};
+
 //var schedule = require('node-schedule');
 
 //var fs = require('fs');
@@ -34,10 +53,13 @@ var config = require('./config');
 var errcode = require('./errcode');
 var utils = require('./utils');
 var show_clientip = require('./middleware/show_clientip');
+var check_session = require('./middleware/check_session');
+app.set('check_session',check_session);
 
 // load ORM db instance
 // var sequelize = require('./dbconnection/mysql/connection');
 var ORM = require('./model/orm/orm');
+app.set('ORM',ORM);
 // create instance of "pool" mySql connection
 //var pool = mysql.createPool(config.db_config);
 
@@ -128,7 +150,7 @@ app.listen(process.env.PORT || app.get('port'), function(){
 var api_router = express.Router();
 app.use(config.api_path,api_router);
 
-controllers = require('./controllers')(app, api_router, ORM, config);
+controllers = require('./controllers')(app, api_router, config);
 
 // Load Views render
 var views_router = express.Router();

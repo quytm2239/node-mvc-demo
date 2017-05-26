@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 const sequelize = new Sequelize('sql12176236', 'sql12176236', '8xmXFPx64r', {
   host: 'sql12.freemysqlhosting.net',
   dialect: 'mysql',
-
+  logging: false,
   pool: {
     max: 100, // max pool size, concurrency connection
     min: 0,
