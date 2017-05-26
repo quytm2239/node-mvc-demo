@@ -93,9 +93,12 @@ $(document).ready(function(){
     }
 
     function register(data){
+        $('#loader').show();
+        $('#submit').prop('disabled',true);
         var registerUrl = document.location.origin + register_api_route;
-        httpGetAsync("POST",registerUrl,data,function (responseText) {
-            console.log(responseText);
+        httpGetAsync("POST",registerUrl,data,function () {
+            $('#loader').hide();
+            $('#submit').prop('disabled',false);
         });
     }
 
@@ -120,6 +123,7 @@ $(document).ready(function(){
                     error.css({"line-height":"50px","color":"#FF0000"});
                     error.css({"border-width":"1px","border-color":"#FF0000"});
                 }
+                callback();
             }
         }
         xmlHttp.open(method, theUrl, true); // true for asynchronous

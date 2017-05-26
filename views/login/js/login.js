@@ -50,9 +50,12 @@ $(document).ready(function(){
     }
 
     function login(data){
+        $('#loader').show();
+        $('#submit').prop('disabled',true);
         var loginUrl = document.location.origin + login_api_route;
-        httpGetAsync("POST",loginUrl,data,function (responseText) {
-            console.log(responseText);
+        httpGetAsync("POST",loginUrl,data,function () {
+            $('#loader').show();
+            $('#submit').prop('disabled',true);
         });
     }
 
@@ -76,6 +79,7 @@ $(document).ready(function(){
                     error.css({"line-height":"50px","color":"#FF0000"});
                     error.css({"border-width":"1px","border-color":"#FF0000"});
                 }
+                callback();
             }
         }
         xmlHttp.open(method, theUrl, true); // true for asynchronous
