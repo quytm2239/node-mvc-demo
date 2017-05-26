@@ -20,7 +20,7 @@ var session = require('express-session')
 
 app.use(session({
     secret: 'node-mvc-demo',
-    cookie: { maxAge: 2628000000 },
+    cookie: { maxAge: 2592000000 },
     resave: false,
     saveUninitialized: false
 }));

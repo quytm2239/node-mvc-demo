@@ -12,7 +12,7 @@ module.exports = function(app, api_router, config){
 	api_router.post('/login', function(req, res) {
 		var username = req.body.username;
 		var rawpassword = req.body.password;
-		console.log(username + '/' + rawpassword);
+
 		ORM.Account.findOne({ where: {username: username} }).then(account => {
   			// project will be the first entry of the Projects table with the title 'aProject' || null
 			if (account) {
@@ -23,17 +23,26 @@ module.exports = function(app, api_router, config){
 					req.session.email = account.dataValues.email;
 					req.session.hashedPassword = account.dataValues.password;
 
-					res.redirect('/main');
+					res.status(200).send({
+						success: true,
+						message: 'Login successfully!'
+					});
 				} else {
-					res.redirect('/login?error=0');
+					res.status(400).send({
+						success: false,
+						message: 'Wrong username or password!'
+					});
 				}
 			} else {
-				res.redirect('/login?error=0');
+				res.status(400).send({
+					success: false,
+					message: 'Wrong username or password!'
+				});
 			}
 		});
 	});
 
-	api_router.get('/logout', function(req, res) {
+	api_router.post('/logout', function(req, res) {
 		req.session.destroy(function(err) {
 	  	// cannot access session here
 			res.redirect('/login');

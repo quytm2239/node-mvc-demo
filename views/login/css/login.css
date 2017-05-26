@@ -25,6 +25,15 @@ button:hover {
     opacity: 0.8;
 }
 
+.error {
+    margin: 0px;
+    border: 0px solid #FF0000;
+    text-align: center;
+    vertical-align: middle;
+    color: #FF0000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .cancelbtn {
     width: auto;
     padding: 10px 18px;

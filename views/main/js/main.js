@@ -37,17 +37,18 @@ function httpGetAsync(method, theUrl, data, callback)
     xmlHttp.onreadystatechange = function() {
         if (xmlHttp.readyState == 4)
         {
-            if (xmlHttp.status == 200) {
-                error.html("<b>Register successfully!<a href=" + "/" + "login" +"> Login now? </a></b>");
-                error.height(50);
-                error.css({"line-height":"50px","color":"#00FF00"});
-                error.css({"border-width":"1px","border-color":"#00FF00"});
-            } else {
-                error.text('Something went wrong please try again!');
-                error.height(50);
-                error.css({"line-height":"50px","color":"#FF0000"});
-                error.css({"border-width":"1px","border-color":"#FF0000"});
-            }
+            window.location = '/login';
+            // if (xmlHttp.status == 200) {
+            //     // error.html("<b>Register successfully!<a href=" + "/" + "login" +"> Login now? </a></b>");
+            //     // error.height(50);
+            //     // error.css({"line-height":"50px","color":"#00FF00"});
+            //     // error.css({"border-width":"1px","border-color":"#00FF00"});
+            // } else {
+            //     error.text('Something went wrong please try again!');
+            //     error.height(50);
+            //     error.css({"line-height":"50px","color":"#FF0000"});
+            //     error.css({"border-width":"1px","border-color":"#FF0000"});
+            // }
         }
     }
     xmlHttp.open(method, theUrl, true); // true for asynchronous
