@@ -31,6 +31,10 @@ function logout(){
     });
 }
 
+function download(){
+    window.location.href = "/api/download";
+}
+
 function httpGetAsync(method, theUrl, data, callback)
 {
     var xmlHttp = new XMLHttpRequest();

@@ -69,6 +69,7 @@ app.set('port', config.PORT || process.env.port || 1234);
 app.set('utils',utils);
 app.set('errcode',errcode);
 app.set('upload_dir',__dirname + '/uploaded_image');
+app.set('download-folder',__dirname + '/download-folder');
 /*
 // Add headers
 app.use(function (req, res, next) {
