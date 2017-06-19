@@ -1,8 +1,9 @@
 var Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('sql12176236', 'sql12176236', '8xmXFPx64r', {
-  host: 'sql12.freemysqlhosting.net',
-  dialect: 'mysql',
+const sequelize = new Sequelize('d3req1cv408t06', 'lcrzlfpkqyuezy', '61aa25d46f82cb21ae2a737a79a3e4671e6ba623c46a7032e099d48eea311e30', {
+  host: 'ec2-23-21-220-48.compute-1.amazonaws.com',
+  port: 5432,
+  dialect: 'postgresql',
   logging: false,
   pool: {
     max: 100, // max pool size, concurrency connection
