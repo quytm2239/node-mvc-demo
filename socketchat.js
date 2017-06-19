@@ -19,7 +19,6 @@ module.exports = function (io) {
             var room = io.sockets.adapter.rooms[common_room];
 
             var jsonData = {
-                master_id : master_id,
                 room : common_room,
                 user_name : data.user_name,
                 total_online : room.length
