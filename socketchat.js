@@ -1,13 +1,15 @@
 var common_room = 69;
-module.exports = function (io) {
+
+module.exports = function(io) {
+    console.log('->*<3- [SOCKETCHAT is LOADED] ->*<3-');
     io.on('connection', function (socket) {
-        socket.emit('my-name-is', serverName);
+        console.log(socket.id + ' connected');
 
         var addedUser = false;
 
         socket.on('join_chat', function (data) {
             if (addedUser) return;
-
+            console.log(data);
             // var master_id = data.master_id;
             // var salve_id = data.salve_id;
             socket.username = data.user_name;
@@ -29,6 +31,7 @@ module.exports = function (io) {
 
         // when the client emits 'new message', this listens and executes
         socket.on('new_message', function (data) {
+            console.log(data);
             var mSecondsTime = new Date().getTime();
 
             var jsonData = {
