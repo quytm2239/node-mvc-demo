@@ -10,11 +10,7 @@ module.exports = function(io) {
         socket.on('join_chat', function (data) {
             if (addedUser) return;
             console.log(data);
-            // var master_id = data.master_id;
-            // var salve_id = data.salve_id;
             socket.username = data.username;
-            // var room_id = (master_id > salve_id) ? master_id + '_' + salve_id : salve_id + '_' + master_id;
-            // console.log(data.user_name + 'has joined room: ' +room_id);
             socket.room = common_room;
             socket.join(common_room);
 
@@ -35,7 +31,7 @@ module.exports = function(io) {
             var mSecondsTime = new Date().getTime();
 
             var jsonData = {
-                username: data.username ? data.username : socket.username,
+                username: socket.username,
                 message: data.message,
                 time: mSecondsTime
             };
