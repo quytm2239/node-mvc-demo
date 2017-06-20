@@ -12,7 +12,7 @@ module.exports = function(io) {
             console.log(data);
             // var master_id = data.master_id;
             // var salve_id = data.salve_id;
-            socket.username = data.user_name;
+            socket.username = data.username;
             // var room_id = (master_id > salve_id) ? master_id + '_' + salve_id : salve_id + '_' + master_id;
             // console.log(data.user_name + 'has joined room: ' +room_id);
             socket.room = common_room;
@@ -22,7 +22,7 @@ module.exports = function(io) {
 
             var jsonData = {
                 room : common_room,
-                user_name : data.user_name,
+                username : data.username,
                 total_online : room.length
             };
 
