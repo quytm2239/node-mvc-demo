@@ -68,6 +68,9 @@ module.exports = function(app, api_router, config){
 						{ fullname: inPassword }
 					]
 				}, defaults: {
+					username: inUsername,
+					email: inEmail,
+					fullname: inPassword,
 					password: passwordHash.generate(inPassword),
 					balance: inBalance,
 					gender: inGender
