@@ -62,30 +62,35 @@ module.exports = function(app, api_router, config){
 			res.status(400).send({
 				message: 'Username is not valid!'
 			})
+			return
 		}
 
 		if (utils.chkObj(inEmail) || utils.validateEmail(inEmail) == false) {
 			res.status(400).send({
 				message: 'Email is not valid!'
 			})
+			return
 		}
 
 		if (utils.chkObj(inPassword)) {
 			res.status(400).send({
 				message: 'Password is not valid!'
 			})
+			return
 		}
 
 		if (utils.chkObj(inFullname)) {
 			res.status(400).send({
 				message: 'Fullname is not valid!'
 			})
+			return
 		}
 
 		if (utils.chkObj(inBalance) || isNaN(inBalance)) {
 			res.status(400).send({
 				message: 'Balance is not valid! (must be number and > 0)'
 			})
+			return
 		}
 
 		// Check email/username/fullname
