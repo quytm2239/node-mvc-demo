@@ -58,6 +58,36 @@ module.exports = function(app, api_router, config){
 		var inGender   	= req.body.gender
 		var inBalance  	= req.body.balance
 
+		if (utils.chkObj(inUsername)) {
+			res.status(400).send({
+				message: 'Username is not valid!'
+			})
+		}
+
+		if (utils.chkObj(inEmail) || utils.validateEmail(inEmail) == false) {
+			res.status(400).send({
+				message: 'Email is not valid!'
+			})
+		}
+
+		if (utils.chkObj(inPassword)) {
+			res.status(400).send({
+				message: 'Password is not valid!'
+			})
+		}
+
+		if (utils.chkObj(inFullname)) {
+			res.status(400).send({
+				message: 'Fullname is not valid!'
+			})
+		}
+
+		if (utils.chkObj(inBalance) || isNaN(inBalance)) {
+			res.status(400).send({
+				message: 'Balance is not valid! (must be number and > 0)'
+			})
+		}
+
 		// Check email/username/fullname
 		ORM.Account
 			.findOrCreate({
@@ -77,11 +107,6 @@ module.exports = function(app, api_router, config){
 				}
 			})
 			.spread((user, created) => {
-				console.log(user.get({
-					plain: true
-				}))
-				console.log(created)
-
 				if (created) {
 					res.status(200).send({
 						message: 'Account is created successfully!'
@@ -93,7 +118,7 @@ module.exports = function(app, api_router, config){
 						})
 					} else if (inEmail == user.email) {
 						res.status(400).send({
-							message: 'Username already existed!'
+							message: 'Email already existed!'
 						})
 					} else {
 						res.status(400).send({
