@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 //Create Item Table Structure
 var MoneyPlan = sequelize.define('MoneyPlan', {
     id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    account: Sequelize.INTEGER // ref to which account
+    account: Sequelize.INTEGER, // ref to which account
     content: Sequelize.STRING,
     total: Sequelize.STRING, // total spent amount
     members: Sequelize.STRING, // all members who join this plan
