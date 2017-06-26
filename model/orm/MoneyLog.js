@@ -6,11 +6,11 @@ var MoneyLog = sequelize.define('MoneyLog', {
     account: Sequelize.INTEGER, // ref to which account
     amount: Sequelize.STRING,
     detail: Sequelize.STRING,
-    member: Sequelize.INTEGER // spent for which member (optional-member_id)
+    members: Sequelize.INTEGER // spent for which member (optional-member_id)
 });
 
 // force: true will drop the table if it already exists
-MoneyLog.sync({force: false}).then(() => {
+MoneyLog.sync({force: true}).then(() => {
 });
 
 module.exports = MoneyLog;
