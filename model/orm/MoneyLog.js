@@ -10,7 +10,7 @@ var MoneyLog = sequelize.define('MoneyLog', {
 });
 
 // force: true will drop the table if it already exists
-MoneyLog.sync({force: true}).then(() => {
+MoneyLog.sync({force: false}).then(() => {
 });
 
 module.exports = MoneyLog;
