@@ -10,4 +10,6 @@ module.exports = function(app, api_router, config){
 
 	require(money_path + '/account')(app, api_router, config);
 	console.log('1. home Controller is loaded');
+
+	require('./list/list')(app, api_router, config);
 };
