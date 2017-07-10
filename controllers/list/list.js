@@ -5,6 +5,7 @@
 module.exports = function(app, api_router, config){
 	var utils = app.get('utils');
 	var errcode = app.get('errcode');
+	var ORM = app.get('ORM');
 
 	api_router.get('/list', function(req, res) {
 		res.status(200).send({
