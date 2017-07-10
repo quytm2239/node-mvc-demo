@@ -22,7 +22,7 @@ module.exports = function(app, api_router, config){
 		});
 	});
 
-	api_router.post('/last',function () {
+	api_router.post('/last',function (req, res) {
 		var lat = req.body.lat;
 		var lon = req.body.lon;
 		var name = req.body.name;
@@ -32,7 +32,7 @@ module.exports = function(app, api_router, config){
 		});
 	});
 
-	api_router.get('/last',function () {
+	api_router.get('/last',function (req, res) {
 		ORM.Location.findAll().then(locations => {
 			console.log(locations)
 			res.status(200).send(locations);
