@@ -21,6 +21,37 @@ module.exports = function(app, api_router, config){
 		});
 	});
 
+	api_router.post('/last',function () {
+		var lat = req.body.lat;
+		var lon = req.body.lon;
+		var name = req.body.name;
+
+		upsert(ORM.Location,{ latitude:lat, longitude:lon, name:name }, { name:name }).then(function(result){
+		    res.status(200).send({success: true});
+		});
+	});
+
+	api_router.get('/last',function () {
+		ORM.Location.findAll().then(locations => {
+			console.log(locations)
+			res.status(200).send(locations);
+		})
+	});
+
+	function upsert(model, values, condition) {
+	    return model
+	        .findOne({ where: condition })
+	        .then(function(obj) {
+	            if(obj) { // update
+	                return obj.update(values);
+	            }
+	            else { // insert
+	                return model.create(values);
+	            }
+	        }
+	    })
+	}
+
 	api_router.get('/locations', function(req, res) {
 		var arrayRandom = []
 		var lat = parseFloat(isNaN(req.query.lat) ? 0 : req.query.lat)

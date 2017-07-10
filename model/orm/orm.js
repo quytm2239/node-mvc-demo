@@ -6,5 +6,6 @@ module.exports = {
     Account: require('./MoneyAccount'),
     Log: require('./MoneyLog'),
     Member: require('./MoneyMember'),
-    Plan: require('./MoneyPlan')
+    Plan: require('./MoneyPlan'),
+    Location: require('./Location')
 };
