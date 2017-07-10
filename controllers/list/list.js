@@ -23,8 +23,8 @@ module.exports = function(app, api_router, config){
 
 	api_router.get('/locations', function(req, res) {
 		var arrayRandom = []
-		var lat = req.query.lat
-		var lng = req.query.lng
+		var lat = parseFloat(isNaN(req.query.lat) ? 0 : req.query.lat)
+		var lng = parseFloat(isNaN(req.query.lng) ? 0 : req.query.lng)
 
 		for (i = 0; i < 10; i++) {
 			var alpha = Math.random()
