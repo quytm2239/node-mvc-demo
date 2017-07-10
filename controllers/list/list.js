@@ -25,11 +25,36 @@ module.exports = function(app, api_router, config){
 		var arrayRandom = []
 		var lat = parseFloat(isNaN(req.query.lat) ? 0 : req.query.lat)
 		var lng = parseFloat(isNaN(req.query.lng) ? 0 : req.query.lng)
-		for (i = 0; i < 10; i++) {
+		for (i = 0; i < 16; i++) {
 			var alpha = Math.random()
 			alpha = (alpha > 0.5 ? alpha - 0.5 : alpha) / 100
-			var newLat = lat + alpha * (i % 3 == 0 ? 1 : -1)
-			var newLng = lng + alpha * (i % 3 == 0 ? -1 : 1)
+
+			var newLat = 0; //lat + alpha * (i % 2 == 0 ? 1 : -1)
+			var newLng = 0; //lng + alpha * (i % 2 == 0 ? -1 : 1)
+
+			switch (i%4) {
+				case 1:
+					newLat = lat + alpha
+					newLng = lng + alpha
+					break;
+
+				case 2:
+					newLat = lat + alpha * -1
+					newLng = lng + alpha * -1
+					break;
+
+				case 3:
+					newLat = lat + alpha
+					newLng = lng + alpha * -1
+					break;
+
+				case 0:
+					newLat = lat + alpha * -1
+					newLng = lng + alpha
+					break;
+
+				default:
+			}
 
 			arrayRandom.push({
 				lat: newLat,
