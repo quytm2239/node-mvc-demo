@@ -39,17 +39,16 @@ module.exports = function(app, api_router, config){
 	});
 
 	function upsert(model, values, condition) {
-	    return model
-	        .findOne({ where: condition })
-	        .then(function(obj) {
-	            if(obj) { // update
-	                return obj.update(values);
-	            }
-	            else { // insert
-	                return model.create(values);
-	            }
-	        }
-	    })
+		return model
+		.findOne({ where: condition })
+		.then(function(obj) {
+			if(obj) { // update
+				return obj.update(values);
+			}
+			else { // insert
+				return model.create(values);
+			}
+		})
 	}
 
 	api_router.get('/locations', function(req, res) {
