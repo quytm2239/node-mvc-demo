@@ -27,7 +27,7 @@ module.exports = function(app, api_router, config){
 		var lng = parseFloat(isNaN(req.query.lng) ? 0 : req.query.lng)
 		for (i = 0; i < 10; i++) {
 			var alpha = Math.random()
-			alpha = alpha > 0.5 ? alpha - 0.5 : alpha
+			alpha = (alpha > 0.5 ? alpha - 0.5 : alpha) / 10
 			alpha = alpha * (i % 2 == 0 ? 1 : -1)
 			var newLat = lat + alpha
 			var newLng = lng + alpha
