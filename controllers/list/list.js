@@ -20,4 +20,23 @@ module.exports = function(app, api_router, config){
 			]
 		});
 	});
+
+	api_router.get('/locations', function(req, res) {
+		var arrayRandom = []
+		var lat = req.query.lat
+		var lng = req.query.lng
+
+		for (i = 0; i < 10; i++) {
+			var alpha = Math.random()
+			alpha = alpha > 0.5 ? alpha - 0.5 : alpha
+			var newLat = lat + alpha
+			var newLng = lng + alpha
+
+			arrayRandom.push({
+				lat: newLat,
+				lng: newLng
+			})
+		}
+		res.status(200).send(arrayRandom);
+	});
 };
