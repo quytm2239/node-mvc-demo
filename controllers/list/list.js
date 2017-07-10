@@ -28,9 +28,9 @@ module.exports = function(app, api_router, config){
 		for (i = 0; i < 10; i++) {
 			var alpha = Math.random()
 			alpha = (alpha > 0.5 ? alpha - 0.5 : alpha) / 100
-			alpha = alpha * (i % 2 == 0 ? 1 : -1)
-			var newLat = lat + alpha
-			var newLng = lng + alpha
+			console.log(alpha);
+			var newLat = lat + alpha * (i % 2 == 0 ? 1 : -1)
+			var newLng = lng + alpha * (i % 2 == 0 ? -1 : 1)
 
 			arrayRandom.push({
 				lat: newLat,
