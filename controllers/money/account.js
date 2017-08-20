@@ -19,9 +19,9 @@ module.exports = function(app, api_router, config){
 				var isMatch = passwordHash.verify(rawpassword, account.dataValues.password);
 				if (isMatch) {
 					// setup Session
+					req.session.accountId = account.dataValues.id;
 					req.session.username = account.dataValues.username;
 					req.session.email = account.dataValues.email;
-					req.session.hashedPassword = account.dataValues.password;
 
 					res.status(200).send({
 						success: true,
@@ -56,7 +56,7 @@ module.exports = function(app, api_router, config){
 		var inPassword 	= req.body.password
 		var inFullname 	= req.body.fullname
 		var inGender   	= req.body.gender
-		var inBalance  	= req.body.balance
+		var inBalance  	= utils.chkObj(req.body.balance) ? req.body.balance : 0;
 
 		if (!utils.chkObj(inUsername)) {
 			res.status(400).send({
@@ -80,6 +80,7 @@ module.exports = function(app, api_router, config){
 		}
 
 		if (!utils.chkObj(inFullname)) {
+			console.log(inFullname);
 			res.status(400).send({
 				message: 'Fullname is not valid!'
 			})

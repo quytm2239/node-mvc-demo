@@ -1,7 +1,7 @@
 var sequelize = require('./../../dbconnection/mysql/connection');
 var Sequelize = require('sequelize');
 //Create Item Table Structure
-var MoneyPlan = sequelize.define('MoneyPlan', {
+var Plan = sequelize.define('Plan', {
     id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     account: Sequelize.INTEGER, // ref to which account
     content: Sequelize.STRING,
@@ -13,7 +13,7 @@ var MoneyPlan = sequelize.define('MoneyPlan', {
 });
 
 // force: true will drop the table if it already exists
-MoneyPlan.sync({force: false}).then(() => {
+Plan.sync({force: false}).then(() => {
 });
 
-module.exports = MoneyPlan;
+module.exports = Plan;

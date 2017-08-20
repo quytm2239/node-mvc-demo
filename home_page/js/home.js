@@ -26,8 +26,8 @@ function register() {
     window.location = "/register";
 }
 
-var socket = io();
-
-socket.emit('join_chat',{
-    username:'quytm2239'
-});
+// var socket = io();
+//
+// socket.emit('join_chat',{
+//     username:'quytm2239'
+// });

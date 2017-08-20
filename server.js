@@ -18,11 +18,22 @@ var winston = require('winston');
 // https://github.com/expressjs/session
 var session = require('express-session')
 
+var redis = require('redis');
+var redisStore = require('connect-redis')(session);
+var redisClient = redis.createClient();
+
 app.use(session({
     secret: 'node-mvc-demo',
-    cookie: { maxAge: 2592000000 },
+    // cookie: { maxAge: 3000 },
+    // create new redis store.
+    store: new redisStore({
+        host: 'localhost',
+        port: 6379,
+        client: redisClient,
+        ttl :  180}),
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    rolling: true
 }));
 
 // Authentication and Authorization Middleware
@@ -58,7 +69,7 @@ app.set('check_session',check_session);
 
 // load ORM db instance
 // var sequelize = require('./dbconnection/mysql/connection');
-var ORM = require('./model/orm/orm');
+var ORM = require('./model');
 app.set('ORM',ORM);
 // create instance of "pool" mySql connection
 //var pool = mysql.createPool(config.db_config);
@@ -158,7 +169,8 @@ var views_router = express.Router();
 app.use(config.views_path,views_router);
 
 app.use(express.static(__dirname + '/home_page'));
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views/no_authentication'));
+app.use(express.static(__dirname + '/views/require_authentication'));
 
 views = require('./views')(app, views_router, config);
 socketchat = require('./socketchat')(io);

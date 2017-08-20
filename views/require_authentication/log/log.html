@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="log/css/log.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
+
+<h2>log Form</h2>
+
+<div id="loader" class="loader"></div>
+<div class="error" id="error"></div>
+
+<form action="/api/log" method="post">
+  <div class="log/imgcontainer">
+    <img src="log/img/avatar.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label><b>Amount</b></label>
+    <input id="amount" type="text" placeholder="Enter Amount" name="amount" required>
+
+    <label><b>Detail</b></label>
+    <input id="detail" type="text" placeholder="Enter Detail" name="detail" required>
+
+    <label><b>Member</b></label>
+    <input id="member" type="text" placeholder="Enter MemberId" name="member" required>
+
+    <button id="submit" type="button">Add Log</button>
+    <!-- <input type="checkbox" checked="checked"> Remember me -->
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</form>
+
+<script type="text/javascript" src="log/js/log.js"></script>
+</body>
+</html>
